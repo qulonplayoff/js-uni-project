@@ -1,11 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>Smoke Check</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ЛР1: Мій застосунок</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
 </head>
 <body>
-<h1>Привіт! Це Smoke Check для ЛР1</h1>
-<p>Сторінка працює успішно.</p>
+<header>
+    <h1>Інвентаризація носіїв (Варіант 15)</h1>
+</header>
+
+<main>
+    <section id="form-section">
+        <h2 id="form-title">Додати пристрій</h2>
+
+        <form id="deviceForm">
+            <input type="hidden" id="deviceId">
+
+            <div class="field">
+                <label for="serialInput">Серійний номер:</label>
+                <input type="text" id="serialInput">
+                <p class="error-text" id="serialError"></p>
+            </div>
+
+            <div class="field">
+                <label for="typeSelect">Тип носія:</label>
+                <select id="typeSelect">
+                    <option value="">-- Оберіть --</option>
+                    <option value="Флешка">Флешка</option>
+                    <option value="Зовнішній диск">Зовнішній диск</option>
+                    <option value="SD Карта">SD Карта</option>
+                </select>
+                <p class="error-text" id="typeError"></p>
+            </div>
+
+            <div class="field">
+                <label for="ownerInput">Власник:</label>
+                <input type="text" id="ownerInput">
+                <p class="error-text" id="ownerError"></p>
+            </div>
+
+            <div class="field">
+                <label for="statusSelect">Статус:</label>
+                <select id="statusSelect">
+                    <option value="">-- Оберіть --</option>
+                    <option value="Вільно">Вільно</option>
+                    <option value="Видано">Видано</option>
+                </select>
+                <p class="error-text" id="statusError"></p>
+            </div>
+
+            <div class="field">
+                <label for="commentInput">Коментар:</label>
+                <textarea id="commentInput" rows="2"></textarea>
+                <p class="error-text" id="commentError"></p>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" id="saveBtn">Зберегти</button>
+                <button type="button" id="clearBtn">Очистити</button>
+            </div>
+        </form>
+    </section>
+
+    <section id="table-section">
+        <h2>Список пристроїв</h2>
+
+        <div style="margin-bottom: 15px;">
+            <input type="text" id="searchInput" placeholder="Пошук (серійник або власник)...">
+            <select id="filterSelect">
+                <option value="Всі">Всі статуси</option>
+                <option value="Вільно">Тільки вільні</option>
+                <option value="Видано">Тільки видані</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Серійний №</th>
+                <th>Тип</th>
+                <th>Власник</th>
+                <th>Статус</th>
+                <th>Коментар</th>
+                <th>Дії</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>Лабораторна робота 1. Виконав: [Твоє Прізвище]</p>
+</footer>
 </body>
 </html>
