@@ -1,25 +1,25 @@
-// src/repositories/user.repository.ts
+
 
 import { User, CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
-// Імпортуємо генератор унікальних айдішників (ми його ставили в терміналі)
+// Імпортуємо генератор унікальних айдішників
 import { v4 as uuidv4 } from 'uuid';
 
-// Наша імпровізована база даних (просто масив у пам'яті сервера)
+// імпровізована бд
 let users: User[] = [];
 
 export class UserRepository {
 
-    // Повернути всіх користувачів
+    // Повернути юзи
     getAll(): User[] {
         return users;
     }
 
-    // Знайти одного за ID
+    // Знайти одного юза
     getById(id: string): User | undefined {
         return users.find(user => user.id === id);
     }
 
-    // Створити нового
+    // Створити нового юза
     create(dto: CreateUserDto): User {
         const newUser: User = {
             id: uuidv4(), // генеруємо складний унікальний рядок типу "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed"
@@ -30,17 +30,16 @@ export class UserRepository {
         return newUser;
     }
 
-    // Оновити існуючого
+    // Оновити існуючого юза
     update(id: string, dto: UpdateUserDto): User | undefined {
         const index = users.findIndex(user => user.id === id);
         if (index === -1) return undefined; // Якщо не знайшли - повертаємо пустоту
 
-        // Беремо старого юзера і "зверху" накладаємо нові дані (...dto)
+        // додавання нових данних до старого юзера через дто
         users[index] = { ...users[index], ...dto };
         return users[index];
     }
 
-    // Видалити
     delete(id: string): boolean {
         const initialLength = users.length;
         // Фільтруємо масив: залишаємо всіх, крім того, кого треба видалити
@@ -50,5 +49,5 @@ export class UserRepository {
     }
 }
 
-// Експортуємо готовий об'єкт репозиторію, щоб інші файли могли ним користуватись
+// експорт обєкту
 export const userRepository = new UserRepository();

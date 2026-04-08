@@ -1,0 +1,29 @@
+### 1. Створити юзера (буде ID 2)
+POST http://localhost:3000/api/sqlite/users
+Content-Type: application/json
+
+{
+  "email": "ivan2@kpi.ua",
+  "name": "Іван"
+}
+
+### 2. Створити флешку (буде ID 2)
+POST http://localhost:3000/api/sqlite/devices
+Content-Type: application/json
+
+{
+  "serial": "KINGSTON-128",
+  "type": "USB",
+  "owner": "Кафедра",
+  "status": "Вільно"
+}
+
+### 3. Зробити запис у журнал (Іван взяв флешку)
+POST http://localhost:3000/api/sqlite/logs
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "deviceId": 2,
+  "action": "Взяв"
+}

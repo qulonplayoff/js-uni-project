@@ -1,4 +1,4 @@
-// src/services/user.service.ts
+
 
 import { userRepository } from '../repositories/user.repository';
 import { CreateUserDto, UpdateUserDto, User } from '../dtos/user.dto';
@@ -10,7 +10,7 @@ export class UserService {
         return userRepository.getAll();
     }
 
-    // Шукаємо одного. Якщо немає — викидаємо помилку 404 (Not Found)
+    // Шукаємо одного.404
     getUserById(id: string): User {
         const user = userRepository.getById(id);
         if (!user) {
@@ -19,7 +19,7 @@ export class UserService {
         return user;
     }
 
-    // Створюємо нового. Тут робимо ВАЛІДАЦІЮ (вимога на "Відмінно")
+    // Новий юз + реалізація валідації (відмінно)
     createUser(dto: CreateUserDto): User {
         // Перевіряємо, чи є ім'я і чи воно не порожнє
         if (!dto.name || dto.name.trim().length < 2) {
@@ -34,7 +34,7 @@ export class UserService {
         return userRepository.create(dto);
     }
 
-    // Оновлюємо
+    // апдейт
     updateUser(id: string, dto: UpdateUserDto): User {
         const updatedUser = userRepository.update(id, dto);
         if (!updatedUser) {
@@ -43,7 +43,7 @@ export class UserService {
         return updatedUser;
     }
 
-    // Видаляємо
+
     deleteUser(id: string): void {
         const isDeleted = userRepository.delete(id);
         if (!isDeleted) {

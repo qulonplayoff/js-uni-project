@@ -3,15 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const deviceRouter = Router();
 
-// Наша база даних (просто масив у цьому ж файлі)
+// бд
 let devices: any[] = [];
 
-// 1. Отримати всі пристрої (GET)
+// Отримати всі пристрої
 deviceRouter.get('/', (req: Request, res: Response) => {
     res.status(200).json(devices);
 });
 
-// 2. Отримати один за ID (GET)
+// 2. Отримати один
 deviceRouter.get('/:id', (req: Request, res: Response) => {
     const device = devices.find(d => d.id === req.params.id);
     if (!device) {
@@ -20,11 +20,11 @@ deviceRouter.get('/:id', (req: Request, res: Response) => {
     res.status(200).json(device);
 });
 
-// 3. Створити новий (POST) - з простою валідацією
+// Створити новий + проста валідація
 deviceRouter.post('/', (req: Request, res: Response) => {
     const { serial, type, owner, status } = req.body;
 
-    // Базова перевірка (вимога для задовільно)
+    // Базова перевірка (задовільно)
     if (!serial || !type) {
         return res.status(400).json({
             error: "Помилка валідації",
@@ -44,7 +44,7 @@ deviceRouter.post('/', (req: Request, res: Response) => {
     res.status(201).json(newDevice);
 });
 
-// 4. Оновити (PUT)
+// Оновити
 deviceRouter.put('/:id', (req: Request, res: Response) => {
     const index = devices.findIndex(d => d.id === req.params.id);
     if (index === -1) {
@@ -55,7 +55,7 @@ deviceRouter.put('/:id', (req: Request, res: Response) => {
     res.status(200).json(devices[index]);
 });
 
-// 5. Видалити (DELETE)
+//Видалити
 deviceRouter.delete('/:id', (req: Request, res: Response) => {
     const initialLength = devices.length;
     devices = devices.filter(d => d.id !== req.params.id);

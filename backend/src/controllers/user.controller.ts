@@ -1,17 +1,17 @@
-// src/controllers/user.controller.ts
+
 
 import { Request, Response } from 'express';
 import { userService } from '../services/user.service';
 
 export class UserController {
 
-    // Отримати всіх (GET)
+    // Отримати всіх
     getAll(req: Request, res: Response) {
         const users = userService.getAllUsers();
         res.status(200).json(users); // 200 OK
     }
 
-    // Отримати одного за ID (GET)
+    // Отримати одного
     getById(req: Request, res: Response) {
         try {
             // ДОДАЛИ "as string", щоб TypeScript заспокоївся
@@ -23,7 +23,7 @@ export class UserController {
         }
     }
 
-    // Створити нового (POST)
+    // Створити нового
     create(req: Request, res: Response) {
         try {
             const dto = req.body;
@@ -34,7 +34,7 @@ export class UserController {
         }
     }
 
-    // Оновити (PUT)
+    // Оновити
     update(req: Request, res: Response) {
         try {
             // ДОДАЛИ "as string"
@@ -47,7 +47,7 @@ export class UserController {
         }
     }
 
-    // Видалити (DELETE)
+    // Видалити
     delete(req: Request, res: Response) {
         try {
             // ДОДАЛИ "as string"
